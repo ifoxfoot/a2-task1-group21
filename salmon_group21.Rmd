@@ -64,9 +64,10 @@ jack_coho_graph <- ggplot() +
   theme_minimal() +
   labs(x = "Year", y = "Jack Coho")
 
-#make a patchwork graph and finalize it
+#make a patchwork graph and store it
 fish_patchwork <- coho_graph/steelhead_graph/jack_coho_graph
 
+#Call patchwork and add caption
 fish_patchwork + plot_annotation(caption = "Time series of Salmon Species Passing Willamette Falls 2001-2011")
   
 ```
