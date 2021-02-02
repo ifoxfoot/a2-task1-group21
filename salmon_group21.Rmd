@@ -2,9 +2,84 @@
 title: "Salmon RMD"
 author: "Iris Foxfoot"
 date: "1/29/2021"
-output: html_document
+output: 
+  html_document:
+    code_folding: hide
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(
+	echo = TRUE,
+	message = FALSE,
+	warning = FALSE
+)
+library(tidyverse)
+library(lubridate)
+library(here)
+library(janitor)
+library(tsibble)
+library(patchwork)
 ```
+
+## Willamette Falls Fish Passage Timeseries Summary {.tabset}
+
+### Original Time Series
+
+```{r}
+#first read in the data
+fish_passage <- read_csv(here("data", "willamette_fish_passage.csv")) %>% 
+  clean_names()
+
+#format dates and turn into tsibble  
+fish_tsibble <- fish_passage %>% 
+  mutate(date = lubridate::mdy(date)) %>% 
+  as_tsibble(key = NULL, index = date)
+
+#select coho, jack coho, and steelhead
+cjs_tsibble <- fish_tsibble %>% 
+  select("coho", "jack_coho", "steelhead")
+
+#Turn na to zero
+cjs_tsibble[is.na(cjs_tsibble)] <- 0
+
+#graph in ggplot, stored for late use in patchwork
+coho_graph <- ggplot() + 
+  geom_line(data = cjs_tsibble, 
+            aes(x = date, y = coho),
+            color = "deeppink3") +
+  theme_minimal() +
+  labs(x = "Year", y = "Coho")
+
+steelhead_graph <- ggplot() +
+  geom_line(data = cjs_tsibble, 
+            aes(x = date, y = steelhead),
+            color = "blue") +
+  theme_minimal() +
+  labs(x = "Year", y = "Steelhead")
+
+jack_coho_graph <- ggplot() +
+  geom_line(data = cjs_tsibble,
+            aes(x = date, y = jack_coho),
+            color = "darkgreen") +
+  theme_minimal() +
+  labs(x = "Year", y = "Jack Coho")
+
+#make a patchwork graph and store it
+fish_patchwork <- coho_graph/steelhead_graph/jack_coho_graph
+
+#Call patchwork and add caption
+fish_patchwork + plot_annotation(caption = "Time series of Salmon Species Passing Willamette Falls 2001-2011")
+  
+```
+
+-All three species exhibit  clear seasonality 
+
+-Steelhead are the most numerous fish of the three species to be observed
+
+### Seasonplots
+
+(tab content here)
+
+### Annual Counts by Species
+
+(tab content here)
