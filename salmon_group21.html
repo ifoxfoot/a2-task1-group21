@@ -261,7 +261,7 @@ fish_patchwork + plot_annotation(caption = &quot;Time series of Salmon Species P
 <div id="seasonplots" class="section level3">
 <h3>Seasonplots</h3>
 <pre class="r"><code>#Using gg_season to create seasonplots and storing them for use in patchwork
-coho_seasonplot &lt;- gg_season(data = cjs_tsibble, y = coho, show.legend = FALSE) + # hiding all but one legend to reduce crowding
+coho_seasonplot &lt;- gg_season(data = cjs_tsibble, y = coho, show.legend = FALSE) + #hiding all but one legend to reduce crowding
   theme_minimal() +
   labs(x = &quot;Month&quot;,
        y = &quot;Coho&quot;)
@@ -279,7 +279,7 @@ jack_coho_seasonplot &lt;- gg_season(data = cjs_tsibble, y = jack_coho, show.leg
        y = &quot;Jack Coho&quot;)
 
 #Patchwork season plots and storing
-seasonplot_pw &lt;- coho_seasonplot / steelhead_seasonplot / jack_coho_seasonplot 
+seasonplot_pw &lt;- coho_seasonplot/steelhead_seasonplot/jack_coho_seasonplot 
 
 
 #Calling out stored patchwork season plots
