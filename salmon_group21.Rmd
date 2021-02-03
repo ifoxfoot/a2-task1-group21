@@ -4,6 +4,7 @@ author: "Iris Foxfoot"
 date: "1/29/2021"
 output: 
   html_document:
+    theme: united
     code_folding: hide
 ---
 
@@ -19,6 +20,7 @@ library(here)
 library(janitor)
 library(tsibble)
 library(patchwork)
+library(feasts)
 ```
 
 ## Willamette Falls Fish Passage Timeseries Summary {.tabset}
@@ -68,7 +70,7 @@ jack_coho_graph <- ggplot() +
 fish_patchwork <- coho_graph/steelhead_graph/jack_coho_graph
 
 #Call patchwork and add caption
-fish_patchwork + plot_annotation(caption = "Time series of Salmon Species Passing Willamette Falls 2001-2011")
+fish_patchwork + plot_annotation(caption = "Time series of Salmon Species Passing Willamette Falls 2001-2010")
   
 ```
 
@@ -77,8 +79,37 @@ fish_patchwork + plot_annotation(caption = "Time series of Salmon Species Passin
 -Steelhead are the most numerous fish of the three species to be observed
 
 ### Seasonplots
+```{r}
+#Using gg_season to create seasonplots and storing them for use in patchwork
+coho_seasonplot <- gg_season(data = cjs_tsibble, y = coho, show.legend = FALSE) + #hiding all but one legend to reduce crowding
+  theme_minimal() +
+  labs(x = "Month",
+       y = "Coho")
 
-(tab content here)
+
+steelhead_seasonplot <- gg_season(data = cjs_tsibble, y = steelhead) +
+  theme_minimal() +
+  labs(x = "Month",
+       y = "Steelhead")
+
+
+jack_coho_seasonplot <- gg_season(data = cjs_tsibble, y = jack_coho, show.legend = FALSE) +
+  theme_minimal() +
+  labs(x = "Month",
+       y = "Jack Coho")
+
+#Patchwork season plots and storing
+seasonplot_pw <- coho_seasonplot/steelhead_seasonplot/jack_coho_seasonplot 
+
+
+#Calling out stored patchwork season plots
+seasonplot_pw + plot_annotation(caption = "Season Plots of Salmon Species Passing Willamette Falls 2001-2010")
+
+```
+
+* The season for Coho seems to extend longer from 2008-2010
+
+* Coho and Jack Coho have similar seasonality whereas the season for Steelheads corresponds with offseason for the Coho and Jack Coho
 
 ### Annual Counts by Species
 
