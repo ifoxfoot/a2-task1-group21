@@ -4,6 +4,7 @@ author: "Iris Foxfoot"
 date: "1/29/2021"
 output: 
   html_document:
+    theme: united
     code_folding: hide
 ---
 
