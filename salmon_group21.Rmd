@@ -1,5 +1,5 @@
 ---
-title: "Salmon RMD"
+title: "Willamette Falls Fish Passage"
 author: "Iris Foxfoot, Larissa Neilson, Joe Walderman"
 date: "1/29/2021"
 output: 
@@ -7,6 +7,12 @@ output:
     theme: united
     code_folding: hide
 ---
+
+![Steelhead salmon - photo courtesy: US National Park Service](steelhead.jpg)
+
+## Overview
+
+### Data citation
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(
