@@ -1,6 +1,6 @@
 ---
 title: "Salmon RMD"
-author: "Iris Foxfoot"
+author: "Iris Foxfoot, Larissa Neilson, Joe Walderman"
 date: "1/29/2021"
 output: 
   html_document:
@@ -74,9 +74,9 @@ fish_patchwork + plot_annotation(caption = "Time series of Salmon Species Passin
   
 ```
 
--All three species exhibit  clear seasonality 
+- All three species exhibit clear seasonality 
 
--Steelhead are the most numerous fish of the three species to be observed
+- Steelhead are the most numerous fish of the three species to be observed
 
 ### Seasonplots
 ```{r}
@@ -113,4 +113,41 @@ seasonplot_pw + plot_annotation(caption = "Season Plots of Salmon Species Passin
 
 ### Annual Counts by Species
 
-(tab content here)
+```{r}
+# Create subset from tsibble to get annual counts of coho, jack coho, and steelheads
+cjs_counts <- cjs_tsibble %>% 
+  mutate(year = year(date)) %>% 
+  index_by(year) %>% 
+  summarize(total_coho = sum(coho, na.rm = TRUE),
+            total_jcoho = sum(jack_coho, na.rm = TRUE),
+            total_steelhead = sum(steelhead, na.rm = TRUE))
+
+# Create ggplots of the annual counts of each species
+tot_coho_plot <- ggplot(data = cjs_counts, aes(x = year, y = total_coho)) +
+  geom_line(color = "deeppink3", size = 1) +
+  labs(x = NULL, y = "Coho") +
+  scale_x_continuous(breaks = c(2001:2010)) +
+  theme_minimal()
+
+tot_steel_plot <- ggplot(data = cjs_counts, aes(x = year, y = total_steelhead)) +
+  geom_line(color = "blue", size = 1) +
+  labs(x = NULL, y = "Steelhead") +
+  scale_x_continuous(breaks = c(2001:2010)) +
+  theme_minimal()
+
+tot_jcoho_plot <- ggplot(data = cjs_counts, aes(x = year, y = total_jcoho)) +
+  geom_line(color = "darkgreen", size = 1) +
+  labs(x = NULL, y = "Jack Coho") +
+  scale_x_continuous(breaks = c(2001:2010)) +
+  theme_minimal()
+
+# Combine in patchwork graph
+annual_count_pw <- (tot_coho_plot/tot_steel_plot/tot_jcoho_plot)
+
+annual_count_pw
+```
+
+- Coho passage has been increasing over time, but shows a decreasing trend after 2009
+- Steelhead  passage has been decreasing over time, with an increasing trend after 2009
+- All three species dropped to low numbers in 2007
+
