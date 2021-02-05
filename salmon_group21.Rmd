@@ -11,8 +11,12 @@ output:
 ![Steelhead salmon - photo courtesy: US National Park Service](steelhead.jpg)
 
 ## Overview
+In this report we explore timeseries data of three salmoniod fish species, Coho, Jack Coho, and Steelhead, as they pass through the Willamette Falls fish ladder in Oregon, USA. We visually explore the data by making a time series plot, we explore seasonality through a season plot, and show the annual species count. Observations were recorded from 2001-01-01 to 2010-12-31 and are limited to adult fish.
+
+![Map of the fish ladder - courtesy of the US Army Corps of Engineers](WFL_vicinity1c.jpg)
 
 ### Data citation
+Colombia Basin Research DART Adult Passge Graphics and Text. Accessed 2021-02-4. Data Courtesy of U.S. Army Corps of Engineers, NWD and Chelan, Douglas, and Grant County PUDs, Yakima Klickitat Fisheries Project, Colville Tribes Fish & Wildlife (OBMEP), Oregon Department of Fish & Wildlife, Washington Department of Fish & Wildlife [http://www.cbr.washington.edu/dart/query/adult_graph_text](http://www.cbr.washington.edu/dart/query/adult_graph_text)
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(
@@ -47,10 +51,10 @@ fish_tsibble <- fish_passage %>%
 cjs_tsibble <- fish_tsibble %>% 
   select("coho", "jack_coho", "steelhead")
 
-#Turn na to zero
+#Turn NA values to zero
 cjs_tsibble[is.na(cjs_tsibble)] <- 0
 
-#graph in ggplot, stored for late use in patchwork
+#graph for each species in ggplot, stored for later use in patchwork
 coho_graph <- ggplot() + 
   geom_line(data = cjs_tsibble, 
             aes(x = date, y = coho),
