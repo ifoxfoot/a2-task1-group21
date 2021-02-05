@@ -91,18 +91,20 @@ fish_patchwork + plot_annotation(caption = "Time series of Salmon Species Passin
 ### Seasonplots
 ```{r}
 #Using gg_season to create seasonplots and storing them for use in patchwork
+
+#Cohos
 coho_seasonplot <- gg_season(data = cjs_tsibble, y = coho, show.legend = FALSE) + #hiding all but one legend to reduce crowding
   theme_minimal() +
   labs(x = "Month",
        y = "Coho")
 
-
+#Steelheads
 steelhead_seasonplot <- gg_season(data = cjs_tsibble, y = steelhead) +
   theme_minimal() +
   labs(x = "Month",
        y = "Steelhead")
 
-
+#Jack Cohos
 jack_coho_seasonplot <- gg_season(data = cjs_tsibble, y = jack_coho, show.legend = FALSE) +
   theme_minimal() +
   labs(x = "Month",
@@ -117,9 +119,9 @@ seasonplot_pw + plot_annotation(caption = "Season Plots of Salmon Species Passin
 
 ```
 
-* The season for Coho seems to extend longer from 2008-2010
+- The season for Coho seems to extend longer from 2008-2010
 
-* Coho and Jack Coho have similar seasonality whereas the season for Steelheads corresponds with offseason for the Coho and Jack Coho
+- Coho and Jack Coho have similar seasonality whereas the season for Steelheads corresponds with offseason for the Coho and Jack Coho
 
 ### Annual Counts by Species
 
