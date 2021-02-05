@@ -8,9 +8,10 @@ output:
     code_folding: hide
 ---
 
+## Overview
 ![Steelhead salmon - photo courtesy: US National Park Service](steelhead.jpg)
 
-## Overview
+### Summary
 In this report we explore timeseries data of three salmoniod fish species, Coho, Jack Coho, and Steelhead, as they pass through the Willamette Falls fish ladder in Oregon, USA. We visually explore the data by making a time series plot, we explore seasonality through a season plot, and show the annual species count. Observations were recorded from 2001-01-01 to 2010-12-31 and are limited to adult fish.
 
 ![Map of the fish ladder - courtesy of the US Army Corps of Engineers](WFL_vicinity1c.jpg)
@@ -162,4 +163,3 @@ annual_count_pw
 - Coho passage has been increasing over time, but shows a decreasing trend after 2009
 - Steelhead  passage has been decreasing over time, with an increasing trend after 2009
 - All three species dropped to low numbers in 2007
-
