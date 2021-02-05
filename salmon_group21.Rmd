@@ -16,7 +16,7 @@ In this report we explore timeseries data of three salmoniod fish species, Coho,
 ![Map of the fish ladder - courtesy of the US Army Corps of Engineers](WFL_vicinity1c.jpg)
 
 ### Data citation
-Colombia Basin Research DART Adult Passge Graphics and Text. Accessed 2021-02-4. Data Courtesy of U.S. Army Corps of Engineers, NWD and Chelan, Douglas, and Grant County PUDs, Yakima Klickitat Fisheries Project, Colville Tribes Fish & Wildlife (OBMEP), Oregon Department of Fish & Wildlife, Washington Department of Fish & Wildlife [http://www.cbr.washington.edu/dart/query/adult_graph_text](http://www.cbr.washington.edu/dart/query/adult_graph_text)
+Colombia Basin Research DART Adult Passge Graphics and Text. Accessed 2021-02-4. Data Courtesy of U.S. Army Corps of Engineers, NWD and Chelan, Douglas, and Grant County PUDs, Yakima Klickitat Fisheries Project, Colville Tribes Fish & Wildlife (OBMEP), Oregon Department of Fish & Wildlife, Washington Department of Fish & Wildlife. [http://www.cbr.washington.edu/dart/query/adult_graph_text](http://www.cbr.washington.edu/dart/query/adult_graph_text)
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(
